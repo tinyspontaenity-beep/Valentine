@@ -30,7 +30,7 @@
       color: #444;
     }
     #noBtn {
-  position: absolute;
+  position: relative;
     }
     button {
       margin-top: 20px;
@@ -42,25 +42,37 @@
       border-radius: 25px;
       cursor: pointer;
     }
-    
   </style>
-  @keyframes beat {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.3); }
-  100% { transform: scale(1); }
-}
 </head>
-  <script>
+ <script>
   const noBtn = document.getElementById("noBtn");
   const yesBtn = document.getElementById("yesBtn");
 
-  noBtn.addEventListener("mouseover", () => {
-    const x = Math.random() * (window.innerWidth - 100);
-    const y = Math.random() * (window.innerHeight - 50);
+  function moveNoButton() {
+    const x = Math.random() * (window.innerWidth - 120);
+    const y = Math.random() * (window.innerHeight - 60);
     noBtn.style.left = x + "px";
     noBtn.style.top = y + "px";
-  });
+  }
 
+  // For mobile (touch)
+  noBtn.addEventListener("touchstart", moveNoButton);
+
+  // For laptop/desktop
+  noBtn.addEventListener("mouseover", moveNoButton);
+
+  yesBtn.addEventListener("click", () => {
+    document.querySelector(".card").innerHTML = `
+      <div style="text-align:center;">
+        <div style="font-size:80px; animation: beat 1s infinite;">❤️</div>
+        <h2>Thank you Gauri 💓</h2>
+        <h3>for becoming my Valentine</h3>
+        <img src="gauri.jpg" width="200" style="border-radius:20px;">
+      </div>
+    `;
+  });
+ </script>
+  
   yesBtn.addEventListener("click", () => {
     document.querySelector(".card").innerHTML = `
       <div style="text-align:center;">
