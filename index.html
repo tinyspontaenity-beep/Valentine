@@ -16,17 +16,22 @@ body {
   align-items: center;
   font-family: Arial, sans-serif;
   overflow: hidden;
+  text-align: center;
 }
 
 h1 {
   color: #e6005c;
-  margin-bottom: 10px;
+}
+
+p {
+  color: #444;
+  font-size: 18px;
 }
 
 .heart {
   font-size: 120px;
   animation: beat 1s infinite;
-  margin-bottom: 20px;
+  margin: 15px 0;
 }
 
 @keyframes beat {
@@ -40,7 +45,7 @@ h1 {
 }
 
 button {
-  padding: 12px 20px;
+  padding: 12px 22px;
   font-size: 16px;
   border: none;
   border-radius: 25px;
@@ -58,16 +63,40 @@ button {
   color: white;
   position: absolute;
 }
+
+/* 💥 Heart Explosion */
+.explode-heart {
+  position: fixed;
+  font-size: 30px;
+  animation: explode 1.2s ease-out forwards;
+}
+
+@keyframes explode {
+  0% {
+    transform: translate(0,0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--x), var(--y)) scale(2);
+    opacity: 0;
+  }
+}
 </style>
 </head>
 
 <body>
 
 <h1>Happy Valentine’s Day ❤️</h1>
+
+<p>
+  You make my world bright ✨<br>
+  Will you be my Valentine, <b>Antya</b>? 💖
+</p>
+
 <div class="heart">❤️</div>
 
 <div class="buttons">
-  <button id="yesBtn">Yes 💖</button>
+  <button id="yesBtn">Yes 💕</button>
   <button id="noBtn">No 😜</button>
 </div>
 
@@ -76,27 +105,41 @@ const noBtn = document.getElementById("noBtn");
 const yesBtn = document.getElementById("yesBtn");
 
 function moveNoButton() {
-  const x = Math.random() * (window.innerWidth - 100);
-  const y = Math.random() * (window.innerHeight - 100);
+  const x = Math.random() * (window.innerWidth - 120);
+  const y = Math.random() * (window.innerHeight - 120);
   noBtn.style.left = x + "px";
   noBtn.style.top = y + "px";
 }
 
-/* Works for mouse */
 noBtn.addEventListener("mouseover", moveNoButton);
-
-/* Works for touch */
 noBtn.addEventListener("touchstart", moveNoButton);
-
-/* Works for TAB / keyboard */
 noBtn.addEventListener("focus", moveNoButton);
 
+/* 💥 Heart Explosion Effect */
+function heartExplosion() {
+  for (let i = 0; i < 25; i++) {
+    const heart = document.createElement("div");
+    heart.className = "explode-heart";
+    heart.innerText = "💖";
+    heart.style.left = "50%";
+    heart.style.top = "50%";
+    heart.style.setProperty("--x", `${Math.random()*400 - 200}px`);
+    heart.style.setProperty("--y", `${Math.random()*400 - 200}px`);
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 1200);
+  }
+}
+
 yesBtn.addEventListener("click", () => {
-  document.body.innerHTML = `
-    <h1>Thank you ❤️</h1>
-    <div class="heart">💖</div>
-    <h2>You made my day!</h2>
-  `;
+  heartExplosion();
+  setTimeout(() => {
+    document.body.innerHTML = `
+      <h1>Thank you gauri 💓</h1>
+      <div class="heart">💓</div>
+      <h2>For becoming my Valentine 💕</h2>
+      <h3>Love u soo much gauri 💓</h3>
+    `;
+  }, 800);
 });
 </script>
 
