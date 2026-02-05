@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>My Valentine 💖</title>
+<title>Happy Valentine’s Day ❤️</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -11,42 +11,22 @@ body {
   height: 100vh;
   background: linear-gradient(135deg, #ff9a9e, #fad0c4);
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   font-family: Arial, sans-serif;
   overflow: hidden;
 }
 
-.card {
-  background: white;
-  padding: 25px;
-  border-radius: 20px;
-  text-align: center;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-  max-width: 320px;
-}
-
-h1 { color: #e6005c; }
-
-button {
-  padding: 12px 22px;
-  font-size: 16px;
-  border: none;
-  border-radius: 25px;
-  margin: 8px;
-  cursor: pointer;
-}
-
-#yesBtn { background: #ff4081; color: white; }
-#noBtn {
-  background: #ff1744;
-  color: white;
-  position: absolute;
+h1 {
+  color: #e6005c;
+  margin-bottom: 10px;
 }
 
 .heart {
-  font-size: 70px;
+  font-size: 120px;
   animation: beat 1s infinite;
+  margin-bottom: 20px;
 }
 
 @keyframes beat {
@@ -54,42 +34,68 @@ button {
   50% { transform: scale(1.3); }
   100% { transform: scale(1); }
 }
+
+.buttons {
+  position: relative;
+}
+
+button {
+  padding: 12px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+#yesBtn {
+  background: #e6005c;
+  color: white;
+  margin-right: 10px;
+}
+
+#noBtn {
+  background: #ff3b7f;
+  color: white;
+  position: absolute;
+}
 </style>
 </head>
 
 <body>
 
-<div class="card">
-  <div class="heart">❤️</div>
-  <h1>Happy Valentine’s Day</h1>
-  <p>You make my world brighter ✨<br>Will you be my Valentine?</p>
-  <button id="yesBtn">Yes 💕</button>
-  <button id="noBtn" tabindex="0">No 😜</button>
+<h1>Happy Valentine’s Day ❤️</h1>
+<div class="heart">❤️</div>
+
+<div class="buttons">
+  <button id="yesBtn">Yes 💖</button>
+  <button id="noBtn">No 😜</button>
 </div>
 
 <script>
 const noBtn = document.getElementById("noBtn");
 const yesBtn = document.getElementById("yesBtn");
 
-function moveNo() {
+function moveNoButton() {
   const x = Math.random() * (window.innerWidth - 100);
-  const y = Math.random() * (window.innerHeight - 50);
+  const y = Math.random() * (window.innerHeight - 100);
   noBtn.style.left = x + "px";
   noBtn.style.top = y + "px";
 }
 
-noBtn.addEventListener("mouseenter", moveNo);
-noBtn.addEventListener("touchstart", e => {
-  e.preventDefault();
-  moveNo();
-});
-noBtn.addEventListener("focus", moveNo);
+/* Works for mouse */
+noBtn.addEventListener("mouseover", moveNoButton);
+
+/* Works for touch */
+noBtn.addEventListener("touchstart", moveNoButton);
+
+/* Works for TAB / keyboard */
+noBtn.addEventListener("focus", moveNoButton);
 
 yesBtn.addEventListener("click", () => {
-  document.querySelector(".card").innerHTML = `
-    <div class="heart">❤️</div>
-    <h2>Thank you Gauri 💖</h2>
-    <p>for becoming my Valentine 💕</p>
+  document.body.innerHTML = `
+    <h1>Thank you ❤️</h1>
+    <div class="heart">💖</div>
+    <h2>You made my day!</h2>
   `;
 });
 </script>
